@@ -7,19 +7,25 @@ public class ArmeriaManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI textoOre;
     [SerializeField] private TextMeshProUGUI textMonedas;
+    [SerializeField] private TextMeshProUGUI textArmas;
     [SerializeField] private GameObject panelArmeria;
 
     [SerializeField] [Range(10, 2000)] private int monedas;
 
     private int cantidadOre;
+    private int cantidadArmas;
 
     void Start() {
 
         cantidadOre = 0;
+        cantidadArmas = 0;
         textMonedas.text = monedas.ToString();
+
+        InvokeRepeating("crearArma", 0, 6);
 
     }
 
+    //Metodo para comprar recursos
     public void comprarOre() {
 
         cantidadOre++;
@@ -27,6 +33,7 @@ public class ArmeriaManager : MonoBehaviour
 
     }
 
+    //Metodo para esconder/activar el panel
     public void OnMouseDown() {
 
         if (panelArmeria.activeSelf) {
@@ -36,4 +43,17 @@ public class ArmeriaManager : MonoBehaviour
         }
 
     }
+
+    //Metodo para generar armas cada X segundos si hay recursos suficientes
+    public void crearArma() {
+
+        if (cantidadOre > 0) {
+            cantidadOre--;
+            cantidadArmas++;
+            textArmas.text = "x " + cantidadArmas;
+            textoOre.text = "x " + cantidadOre;
+        }
+
+    }
+
 }
