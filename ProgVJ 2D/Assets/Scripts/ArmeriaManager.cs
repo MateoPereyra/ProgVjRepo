@@ -11,6 +11,7 @@ public class ArmeriaManager : MonoBehaviour
     [SerializeField] private GameObject panelArmeria;
 
     [SerializeField] [Range(10, 2000)] private int monedas;
+    [SerializeField] [Range(10, 2000)] private int costoOre;
 
     private int cantidadOre;
     private int cantidadArmas;
@@ -19,17 +20,38 @@ public class ArmeriaManager : MonoBehaviour
 
         cantidadOre = 0;
         cantidadArmas = 0;
-        textMonedas.text = monedas.ToString();
-
+        actTexMonedas();
         InvokeRepeating("crearArma", 0, 6);
 
     }
 
+    //////////////////Actualizaciones de texto///////////////////////
+    public void actTexOre () {
+        textoOre.text = "x " + cantidadOre;
+    }
+
+    public void actTexArmas() {
+        textArmas.text = "x " + cantidadArmas;
+    }
+
+    public void actTexMonedas() {
+        textMonedas.text = monedas.ToString();
+    }
+    /////////////////////////////////////////////////////////////////
+    
+    
+    
     //Metodo para comprar recursos
     public void comprarOre() {
 
-        cantidadOre++;
-        textoOre.text = "x " + cantidadOre;
+        if (costoOre <= monedas) {
+
+            cantidadOre++;
+            monedas -= costoOre;
+            actTexOre();
+            actTexMonedas();
+
+        }
 
     }
 
@@ -50,8 +72,8 @@ public class ArmeriaManager : MonoBehaviour
         if (cantidadOre > 0) {
             cantidadOre--;
             cantidadArmas++;
-            textArmas.text = "x " + cantidadArmas;
-            textoOre.text = "x " + cantidadOre;
+            actTexArmas();
+            actTexOre();
         }
 
     }

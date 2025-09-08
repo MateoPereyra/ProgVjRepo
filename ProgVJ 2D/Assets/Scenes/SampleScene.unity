@@ -1211,7 +1211,7 @@ Transform:
   m_GameObject: {fileID: 1442087964}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20.47, y: 1.3, z: 10}
+  m_LocalPosition: {x: -20.697, y: 1.322, z: 10}
   m_LocalScale: {x: 4, y: 4, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1361,7 +1361,8 @@ MonoBehaviour:
   textMonedas: {fileID: 2015777483}
   textArmas: {fileID: 1833363227}
   panelArmeria: {fileID: 874199744}
-  monedas: 228
+  monedas: 510
+  costoOre: 100
 --- !u!1 &1485405990
 GameObject:
   m_ObjectHideFlags: 0
