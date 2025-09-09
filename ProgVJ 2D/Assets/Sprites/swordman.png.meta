@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: a3a098eb3e47cec43a83d33bd932eb1f
+guid: c0d0759c64ededf41825664946721acb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6580333191122807453
-    second: MonedaBRSK_0
+      213: 4889083202587923353
+    second: swordman_0
+  - first:
+      213: -257725841966299965
+    second: swordman_1
+  - first:
+      213: -6212328770657576365
+    second: swordman_2
+  - first:
+      213: -218021081985725533
+    second: swordman_3
+  - first:
+      213: 4799279395600363211
+    second: swordman_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +112,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MonedaBRSK_0
+      name: swordman_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
+        x: 14
+        y: 281
+        width: 81
+        height: 146
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +127,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3659967a3d5fda4a0800000000000000
-      internalID: -6580333191122807453
+      spriteID: 993159fe44389d340800000000000000
+      internalID: 4889083202587923353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swordman_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 242
+        width: 63
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3c4092456bf5c6cf0800000000000000
+      internalID: -257725841966299965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swordman_2
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 16
+        width: 311
+        height: 451
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 35a140db5ef59c9a0800000000000000
+      internalID: -6212328770657576365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swordman_3
+      rect:
+        serializedVersion: 2
+        x: 328
+        y: 276
+        width: 156
+        height: 202
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3abc1b62bfe69fcf0800000000000000
+      internalID: -218021081985725533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: swordman_4
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 202
+        width: 41
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce6c90ce277a9240800000000000000
+      internalID: 4799279395600363211
       vertices: []
       indices: 
       edges: []
@@ -135,7 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      MonedaBRSK_0: -6580333191122807453
+      swordman_0: 4889083202587923353
+      swordman_1: -257725841966299965
+      swordman_2: -6212328770657576365
+      swordman_3: -218021081985725533
+      swordman_4: 4799279395600363211
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
