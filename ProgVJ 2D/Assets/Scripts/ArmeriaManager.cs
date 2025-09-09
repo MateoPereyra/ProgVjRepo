@@ -8,13 +8,18 @@ public class ArmeriaManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textoOre;
     [SerializeField] private TextMeshProUGUI textMonedas;
     [SerializeField] private TextMeshProUGUI textArmas;
+    [SerializeField] private TextMeshProUGUI textReclutas;
+
     [SerializeField] private GameObject panelArmeria;
+    [SerializeField] private GameObject reclutaPrefab;
 
     [SerializeField] [Range(10, 2000)] private int monedas;
     [SerializeField] [Range(10, 2000)] private int costoOre;
+    [SerializeField] [Range(150, 2000)] private int costoRecluta;
 
     private int cantidadOre;
     private int cantidadArmas;
+    private int cantidadRecluta; 
 
     void Start() {
 
@@ -36,6 +41,10 @@ public class ArmeriaManager : MonoBehaviour
 
     public void actTexMonedas() {
         textMonedas.text = monedas.ToString();
+    }
+
+    public void actTexReclutas() {
+        textReclutas.text = "x " + cantidadRecluta;
     }
     /////////////////////////////////////////////////////////////////
     
@@ -66,7 +75,7 @@ public class ArmeriaManager : MonoBehaviour
 
     }
 
-    //Metodo para generar armas cada X segundos si hay recursos suficientes
+    //Metodo para generar armas cada X segundos si hay recursos suficientes (será más util más adelante)
     public void crearArma() {
 
         if (cantidadOre > 0) {
@@ -78,4 +87,16 @@ public class ArmeriaManager : MonoBehaviour
 
     }
 
+    public void reclutar() {
+        if (costoRecluta <= monedas) {
+
+            monedas -= costoRecluta;
+            actTexMonedas();
+
+            cantidadRecluta++;
+            GameObject recluta = Instantiate(reclutaPrefab);
+            recluta.transform.position += Vector3.right * cantidadRecluta;
+            actTexReclutas(); 
+        }
+    }
 }
