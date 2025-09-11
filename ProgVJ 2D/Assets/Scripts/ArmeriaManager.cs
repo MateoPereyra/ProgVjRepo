@@ -99,4 +99,10 @@ public class ArmeriaManager : MonoBehaviour
             actTexReclutas(); 
         }
     }
+
+    public bool getArmas() {
+
+        return cantidadArmas > 0;
+
+    }
 }
