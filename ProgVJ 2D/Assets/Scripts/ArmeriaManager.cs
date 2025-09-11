@@ -87,6 +87,7 @@ public class ArmeriaManager : MonoBehaviour
 
     }
 
+    //Instancia un nuevo recluta para convertir en otra unidad segun su arma (por ahora, solo espadachin)
     public void reclutar() {
         if (costoRecluta <= monedas) {
 
@@ -103,6 +104,16 @@ public class ArmeriaManager : MonoBehaviour
     public bool getArmas() {
 
         return cantidadArmas > 0;
+
+    }
+
+    //Cuando un recluta llega a la armeria
+    private void OnTriggerEnter2D(Collider2D other) { 
+    
+        cantidadArmas--;
+        actTexArmas();
+        cantidadRecluta--;
+        actTexReclutas();
 
     }
 }
