@@ -5025,6 +5025,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armeriamanager: {fileID: 0}
   destino: {fileID: 0}
+  espadachinPrefab: {fileID: 5836857197505123814, guid: 0536001effdf9f145888783ddafd8063, type: 3}
 --- !u!1 &3235984289774336991
 GameObject:
   m_ObjectHideFlags: 0

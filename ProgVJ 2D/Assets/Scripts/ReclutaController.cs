@@ -44,7 +44,8 @@ public class ReclutaController : MonoBehaviour
         
         Vector3 pos = transform.position;
         Destroy(gameObject); // destruye al recluta para convertirlo en otra unidad (Espadachin)
-        Instantiate(espadachinPrefab, pos);
+        GameObject Espadachin = Instantiate(espadachinPrefab);
+        espadachinPrefab.transform.position = pos;
 
     }
 }
