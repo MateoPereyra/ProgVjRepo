@@ -108,12 +108,14 @@ public class ArmeriaManager : MonoBehaviour
     }
 
     //Cuando un recluta llega a la armeria
-    private void OnTriggerEnter2D(Collider2D other) { 
-    
-        cantidadArmas--;
-        actTexArmas();
-        cantidadRecluta--;
-        actTexReclutas();
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.GetComponent<ReclutaController>() != null) {
 
+            cantidadArmas--;
+            actTexArmas();
+            cantidadRecluta--;
+            actTexReclutas();
+
+        }
     }
 }

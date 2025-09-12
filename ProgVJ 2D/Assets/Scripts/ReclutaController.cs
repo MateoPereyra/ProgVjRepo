@@ -16,7 +16,7 @@ public class ReclutaController : MonoBehaviour
         destino = GameObject.Find("Armeria").transform;
 
         puntoDestino = (destino.position - transform.position).normalized;
-        puntoOrigen = (transform.position - destino.position).normalized;
+        puntoOrigen = (transform.position - destino.position).normalized; //por ahora, no se usa
 
 
     }
@@ -33,7 +33,7 @@ public class ReclutaController : MonoBehaviour
     //Para cuando llega a la armería
     private void OnTriggerEnter2D(Collider2D other) {
 
-        if (other.CompareTag("Armeria")) {
+        if (other.GetComponent<ArmeriaManager>() != null) {
             ConvertirAEspadachin();
         }
 
