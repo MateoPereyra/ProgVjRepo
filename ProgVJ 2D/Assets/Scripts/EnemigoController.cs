@@ -6,7 +6,10 @@ public class EnemigoController : MonoBehaviour
     [SerializeField] private ArmeriaManager armeriamanager;
     [SerializeField] private Transform destino;
 
+
     private Vector3 puntoDestino;
+    private bool enAldea;
+    private bool enPelea;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -14,12 +17,51 @@ public class EnemigoController : MonoBehaviour
         destino = GameObject.Find("Armeria").transform;
 
         puntoDestino = (destino.position - transform.position).normalized;
+
+        enAldea = false;
+        enPelea = false;
     }
 
     // Update is called once per frame
     void Update() {
 
-        transform.Translate(puntoDestino * Time.deltaTime);
+        if (!enPelea) {
+            transform.Translate(puntoDestino * Time.deltaTime);
+        }
+    }
+
+
+    //Detecta cuando el enemigo entra a la zona de la aldea para ser atacado, y cuando esta peleando
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+
+        if (other.gameObject.name == "Aldea")
+        {
+            enAldea = true;
+        }
+
+        if (other.GetComponent<ReclutaController>() != null)
+        {
+
+            enPelea = true;
+            Vector3 pos = transform.position;
+            transform.position = pos;
+
+        }
+    }
+
+    public bool GetEnemigoPos() { 
+    
+        return enAldea;
 
     }
+
+    private void OnTriggerExit2D(Collider2D other) {
+
+        if (other.GetComponent<ReclutaController>() != null) {
+            enPelea = false;
+            
+        }
+    }
+
 }
