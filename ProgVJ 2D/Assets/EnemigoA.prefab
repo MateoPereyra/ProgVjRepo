@@ -7545,6 +7545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armeriamanager: {fileID: 0}
   destino: {fileID: 0}
+  recluta: {fileID: 7325682931449005895, guid: 8a1cbdf55c3606449b0347064ac591e2, type: 3}
 --- !u!1 &8827643254797090275
 GameObject:
   m_ObjectHideFlags: 0

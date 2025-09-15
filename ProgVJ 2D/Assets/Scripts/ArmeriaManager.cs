@@ -19,7 +19,8 @@ public class ArmeriaManager : MonoBehaviour
 
     private int cantidadOre;
     private int cantidadArmas;
-    private int cantidadRecluta; 
+    private int cantidadRecluta;
+    private int vida;
 
     void Start() {
 
@@ -27,6 +28,8 @@ public class ArmeriaManager : MonoBehaviour
         cantidadArmas = 0;
         actTexMonedas();
         InvokeRepeating("crearArma", 0, 6);
+
+        vida = 250;
 
     }
 
@@ -118,4 +121,5 @@ public class ArmeriaManager : MonoBehaviour
 
         }
     }
+
 }

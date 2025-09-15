@@ -9,6 +9,7 @@ public class ReclutaController : MonoBehaviour
 
     private Vector3 puntoDestino;
     private Vector3 puntoOrigen;
+    private int vida;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -18,6 +19,7 @@ public class ReclutaController : MonoBehaviour
         puntoDestino = (destino.position - transform.position).normalized;
         puntoOrigen = (transform.position - destino.position).normalized; //por ahora, no se usa
 
+        vida = 100;
 
     }
 
@@ -46,6 +48,15 @@ public class ReclutaController : MonoBehaviour
         Destroy(gameObject); // destruye al recluta para convertirlo en otra unidad (Espadachin)
         GameObject Espadachin = Instantiate(espadachinPrefab);
         espadachinPrefab.transform.position = pos;
+
+    }
+
+    public void recibirDanio(int daño) {
+
+        vida -= daño;
+        if (vida <=0) {
+            Destroy(gameObject);
+        }
 
     }
 }
