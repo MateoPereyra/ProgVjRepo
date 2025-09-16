@@ -17,10 +17,11 @@ public class ArmeriaManager : MonoBehaviour
     [SerializeField] [Range(10, 2000)] private int costoOre;
     [SerializeField] [Range(150, 2000)] private int costoRecluta;
 
+    [SerializeField] private int resistencia;
+
     private int cantidadOre;
     private int cantidadArmas;
     private int cantidadRecluta;
-    private int vida;
 
     void Start() {
 
@@ -29,7 +30,7 @@ public class ArmeriaManager : MonoBehaviour
         actTexMonedas();
         InvokeRepeating("crearArma", 0, 6);
 
-        vida = 250;
+        resistencia = 200;
 
     }
 
@@ -112,6 +113,8 @@ public class ArmeriaManager : MonoBehaviour
 
     //Cuando un recluta llega a la armeria
     private void OnTriggerEnter2D(Collider2D other) {
+
+
         if (other.GetComponent<ReclutaController>() != null) {
 
             cantidadArmas--;
@@ -122,4 +125,19 @@ public class ArmeriaManager : MonoBehaviour
         }
     }
 
+
+    // Método para recibir daño
+    public void RecibirDanio(int danio) {
+        resistencia -= danio;
+            if (resistencia > 0) {
+            Debug.Log("Armería: " + resistencia + " HP restantes");
+        } else {
+            Derrota();
+        }
+   }
+
+    public void Derrota() { 
+        GameManager.instancia.GameOver();
+        Destroy(gameObject);
+    }
 }

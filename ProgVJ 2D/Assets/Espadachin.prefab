@@ -2729,6 +2729,7 @@ GameObject:
   - component: {fileID: -610927916112373548}
   - component: {fileID: -4737147811527602000}
   - component: {fileID: 495160998520478165}
+  - component: {fileID: -266771792139650107}
   m_Layer: 5
   m_Name: Espadachin
   m_TagString: Untagged
@@ -2744,7 +2745,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836857197505123814}
   m_LocalRotation: {x: -0, y: 0.008726557, z: -0, w: 0.9999619}
-  m_LocalPosition: {x: 0, y: 0, z: 3.9176173}
+  m_LocalPosition: {x: 0, y: 0, z: 3.3932111}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2753,7 +2754,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -32.795383, y: 1.3729947}
+  m_AnchoredPosition: {x: -32.798767, y: 1.461186}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!70 &-610927916112373548
@@ -5836,6 +5837,22 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 4c70df3312bb83346a1bf065b30d3467, type: 2}
   - {fileID: 7400000, guid: 1ef525d53ae254f7d82ef364ced85490, type: 2}
   - {fileID: 7400000, guid: fabe4f140fdb9cb448bc941c7c93e8b6, type: 2}
+--- !u!114 &-266771792139650107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5836857197505123814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dda4bfa1d1dc1ba4680222ab6bc537eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 0
+  ataque: 0
+  velocidadAtaque: 0
+  velocidadMovimiento: 0
 --- !u!1 &5847659569308201571
 GameObject:
   m_ObjectHideFlags: 0

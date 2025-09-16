@@ -5023,6 +5023,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e13bcc236dfc3f4884d612f2269d069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vida: 0
+  ataque: 0
+  velocidadAtaque: 0
   armeriamanager: {fileID: 0}
   destino: {fileID: 0}
   espadachinPrefab: {fileID: 5836857197505123814, guid: 0536001effdf9f145888783ddafd8063, type: 3}

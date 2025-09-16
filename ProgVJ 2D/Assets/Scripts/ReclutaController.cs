@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ReclutaController : MonoBehaviour
+public class ReclutaController : UnidadAliada
 {
 
     [SerializeField] private ArmeriaManager armeriamanager;
@@ -9,7 +9,6 @@ public class ReclutaController : MonoBehaviour
 
     private Vector3 puntoDestino;
     private Vector3 puntoOrigen;
-    private int vida;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -20,7 +19,9 @@ public class ReclutaController : MonoBehaviour
         puntoOrigen = (transform.position - destino.position).normalized; //por ahora, no se usa
 
         vida = 100;
-
+        ataque = 15;
+        velocidadAtaque = 2.0f;
+        velocidadMovimiento = 1;
     }
 
     // Update is called once per frame
@@ -30,15 +31,32 @@ public class ReclutaController : MonoBehaviour
             transform.Translate(puntoDestino * Time.deltaTime);
         }
 
+        if (enemigoEnRango != null && enemigoEnRango.conVida) {
+            Atacar(enemigoEnRango); //ataca hasta que el enemigo ya no se encuentre en rango
+        }
+
     }
 
-    //Para cuando llega a la armería
+    //Para cuando llega a la armería y para pelear
     private void OnTriggerEnter2D(Collider2D other) {
 
         if (other.GetComponent<ArmeriaManager>() != null) {
             ConvertirAEspadachin();
         }
 
+        UnidadEnemiga u = other.GetComponent<UnidadEnemiga>();
+        if (u != null) {
+            enemigoEnRango = u;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other) {
+
+        UnidadEnemiga u = other.GetComponent<UnidadEnemiga>();
+        if (u != null && u == enemigoEnRango){
+            enemigoEnRango = null;
+        }
     }
 
     //Convierte al recluta en una nueva unidad
@@ -48,15 +66,6 @@ public class ReclutaController : MonoBehaviour
         Destroy(gameObject); // destruye al recluta para convertirlo en otra unidad (Espadachin)
         GameObject Espadachin = Instantiate(espadachinPrefab);
         espadachinPrefab.transform.position = pos;
-
-    }
-
-    public void recibirDanio(int daño) {
-
-        vida -= daño;
-        if (vida <=0) {
-            Destroy(gameObject);
-        }
 
     }
 }
