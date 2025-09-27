@@ -18,10 +18,10 @@ public class ReclutaController : UnidadAliada
         puntoDestino = (destino.position - transform.position).normalized;
         puntoOrigen = (transform.position - destino.position).normalized; //por ahora, no se usa
 
-        vida = 100;
-        ataque = 15;
-        velocidadAtaque = 2.0f;
-        velocidadMovimiento = 1;
+        //vida = 100;
+        //ataque = 15;
+        //velocidadAtaque = 2.0f;
+        //velocidadMovimiento = 1;
     }
 
     // Update is called once per frame

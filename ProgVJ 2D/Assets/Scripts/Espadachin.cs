@@ -5,10 +5,10 @@ public class Espadachin : UnidadAliada
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        vida = 150;
-        ataque = 35;
-        velocidadAtaque = 1.75f;
-        velocidadMovimiento = 2;
+        //vida = 150;
+        //ataque = 35;
+        //velocidadAtaque = 1.75f;
+        //velocidadMovimiento = 2;
     }
 
     // Update is called once per frame

@@ -1,9 +1,16 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; //Para cambiar escenas en el futuro
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instancia; 
+    public static GameManager instancia { get; private set; }
+
+    private List<UnidadEnemiga> enemigosVivos = new List<UnidadEnemiga>(); //Para el sistema de progresion en hordas
+    private int numeroHorda = 0;
+
+    [SerializeField] private GameObject esqueletoPrefab;
+
     private void Awake() {
         if (instancia == null) {
             instancia = this;
@@ -14,6 +21,49 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start() {
+        NuevaHorda();
+        InstanciarEnemigo(new Vector3(10, 1, 0));
+        InstanciarEnemigo(new Vector3(11, 2, 0));
+        InstanciarEnemigo(new Vector3(12, 3, 0));
+        GetNumEnemigos();
+    }
+    /////////// Sistema de Progresion ///////////////
+
+    private void InstanciarEnemigo(Vector3 posicion) {
+
+        GameObject Esqueleto = Instantiate(esqueletoPrefab);
+        esqueletoPrefab.transform.position = posicion;
+        enemigosVivos.Add(enemigo);
+
+    }
+
+    public void AgregarEnemigo(UnidadEnemiga enemigo) {
+        enemigosVivos.Add(enemigo);
+    }
+
+    public void EliminarEnemigo(UnidadEnemiga enemigo) {
+        enemigosVivos.Remove(enemigo);
+
+        if (enemigosVivos.Count == 0) {
+            NuevaHorda();
+        }
+
+    }
+
+    private void NuevaHorda() {
+
+        numeroHorda++;
+        Debug.Log("Horda: " + numeroHorda);
+        GetNumEnemigos();
+
+    }
+
+    private void GetNumEnemigos() {
+        Debug.Log("Enemigos restantes: " + enemigosVivos.Count);
+    }
+
+    ////////// Victoria/Derrota ////////////
     public void GameOver() {
         Debug.Log("Los monstruos destruyeron la armeria... ¡Game Over!");
         // Por ahora: detener el tiempo

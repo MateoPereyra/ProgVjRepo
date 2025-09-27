@@ -7546,7 +7546,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   armeriamanager: {fileID: 0}
   destino: {fileID: 0}
-  recluta: {fileID: 7325682931449005895, guid: 8a1cbdf55c3606449b0347064ac591e2, type: 3}
 --- !u!114 &5718695328023927328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7559,9 +7558,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaec1286aa0f3bb4c857350103cebcbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 0
-  ataque: 0
-  velocidadAtaque: 0
+  vida: 75
+  ataque: 10
+  velocidadAtaque: 2
 --- !u!1 &8827643254797090275
 GameObject:
   m_ObjectHideFlags: 0
