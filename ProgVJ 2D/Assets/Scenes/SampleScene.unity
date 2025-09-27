@@ -1086,7 +1086,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745567429
 Transform:
   m_ObjectHideFlags: 0
@@ -1342,7 +1342,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 270, y: 406}
+  m_SizeDelta: {x: 270, y: 380}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &874199746
 MonoBehaviour:
@@ -1829,6 +1829,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee56ea13a554f5f44989fbb116f93608, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  esqueletoPrefab: {fileID: 8717663361120014766, guid: 1de0566ee39e41049a9d32559349e5c5, type: 3}
 --- !u!4 &1432436127
 Transform:
   m_ObjectHideFlags: 0
@@ -2071,7 +2072,7 @@ MonoBehaviour:
   textReclutas: {fileID: 2031423700}
   panelArmeria: {fileID: 874199744}
   reclutaPrefab: {fileID: 3113243240086268132, guid: 8a1cbdf55c3606449b0347064ac591e2, type: 3}
-  monedas: 510
+  monedas: 1000
   costoOre: 100
   costoRecluta: 150
   resistencia: 0

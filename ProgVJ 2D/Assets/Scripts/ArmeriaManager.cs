@@ -100,7 +100,19 @@ public class ArmeriaManager : MonoBehaviour
 
             cantidadRecluta++;
             GameObject recluta = Instantiate(reclutaPrefab);
-            recluta.transform.position += Vector3.right * cantidadRecluta;
+            //recluta.transform.position += Vector3.right * cantidadRecluta;
+            int columnasPorFila = 2; // cada fila tiene 2 reclutas
+            int columna = (cantidadRecluta % columnasPorFila) + 1; // +1 para empezar en X=1
+            int fila = (cantidadRecluta / columnasPorFila) + 1;     // +1 para empezar en Y=1
+
+            float distanciaX = 1f; // separación horizontal entre reclutas
+            float distanciaY = 1f; // separación vertical entre filas
+
+            recluta.transform.position = new Vector3(
+                columna * distanciaX,
+                fila * distanciaY,
+                0f
+            );
             actTexReclutas(); 
         }
     }

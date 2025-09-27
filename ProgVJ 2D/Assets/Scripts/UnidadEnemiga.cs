@@ -20,6 +20,7 @@ public class UnidadEnemiga : MonoBehaviour
     }
 
     protected virtual void Morir() {
+        GameManager.instancia.EliminarEnemigo(this);
         Destroy(gameObject);
     }
 
