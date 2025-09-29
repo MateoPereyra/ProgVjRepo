@@ -107,9 +107,10 @@ public class ArmeriaManager : MonoBehaviour
 
             float distanciaX = 1f; // separación horizontal entre reclutas
             float distanciaY = 1f; // separación vertical entre filas
+            float offsetX = -20f; // desplazamiento inicial en X
 
             recluta.transform.position = new Vector3(
-                columna * distanciaX,
+                offsetX + (columna * distanciaX),
                 fila * distanciaY,
                 0f
             );
