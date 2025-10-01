@@ -5,7 +5,8 @@ using System.Collections.Generic;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instancia { get; private set; }
-    [SerializeField] JuegoData juegoData;
+    [SerializeField] private JuegoData juegoData;
+    public JuegoData JuegoData {  get => juegoData; }
 
     private List<UnidadEnemiga> enemigosVivos = new List<UnidadEnemiga>(); //Para el sistema de progresion en hordas
     private float posX, posY; //Posiciones aleatorias para spawnear enemigos

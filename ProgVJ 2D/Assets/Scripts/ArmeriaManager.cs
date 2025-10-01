@@ -13,10 +13,7 @@ public class ArmeriaManager : MonoBehaviour
     [SerializeField] private GameObject panelArmeria;
     [SerializeField] private GameObject reclutaPrefab;
 
-    [SerializeField] [Range(10, 2000)] private int monedas;
-    [SerializeField] [Range(10, 2000)] private int costoOre;
-    [SerializeField] [Range(150, 2000)] private int costoRecluta;
-
+    [SerializeField][Range(10, 2000)] private int monedas;
     [SerializeField] private int resistencia;
 
     private int cantidadOre;
@@ -57,10 +54,10 @@ public class ArmeriaManager : MonoBehaviour
     //Metodo para comprar recursos
     public void comprarOre() {
 
-        if (costoOre <= monedas) {
+        if (GameManager.instancia.JuegoData.CostoOre <= monedas) {
 
             cantidadOre++;
-            monedas -= costoOre;
+            monedas -= GameManager.instancia.JuegoData.CostoOre;
             actTexOre();
             actTexMonedas();
 
@@ -93,9 +90,9 @@ public class ArmeriaManager : MonoBehaviour
 
     //Instancia un nuevo recluta para convertir en otra unidad segun su arma (por ahora, solo espadachin)
     public void reclutar() {
-        if (costoRecluta <= monedas) {
+        if (GameManager.instancia.JuegoData.CostoRecluta <= monedas) {
 
-            monedas -= costoRecluta;
+            monedas -= GameManager.instancia.JuegoData.CostoRecluta;
             actTexMonedas();
 
             cantidadRecluta++;
