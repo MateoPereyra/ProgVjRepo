@@ -31,4 +31,24 @@ public class UnidadAliada : MonoBehaviour
             tiempoUltimoAtaque = Time.time;
         }
     }
+
+    //Metodo para encontrar a quien atacar
+    protected void enemigoObjetivo(UnidadEnemiga objetivo) {
+        if (objetivo != null) {
+
+            // Ir hacia el enemigo
+            float distancia = Vector3.Distance(transform.position, objetivo.transform.position);
+
+            if (distancia > 0.5f) {
+                transform.position = Vector3.MoveTowards(
+                    transform.position, // pos actual
+                    objetivo.transform.position, // pos objetivo
+                    2f * Time.deltaTime // velocidad de movimiento
+                );
+            } else // si está cerca, atacar
+                {
+                    Atacar(objetivo);
+                }
+        }
+    }
 }
