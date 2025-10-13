@@ -1,18 +1,28 @@
 using UnityEngine;
 using UnityEngine.SceneManagement; //Para cambiar escenas en el futuro
+using System.Collections;
 using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instancia { get; private set; }
+
     [SerializeField] private JuegoData juegoData;
     public JuegoData JuegoData {  get => juegoData; }
 
+    //Manejo de enemigos
     private List<UnidadEnemiga> enemigosVivos = new List<UnidadEnemiga>(); //Para el sistema de progresion en hordas
     private float posX, posY; //Posiciones aleatorias para spawnear enemigos
     private int cantidad; //Cantidad aleatoria de enemigos a generar en cada horda
 
-    [SerializeField] private GameObject esqueletoPrefab;
+    //Manejo de hordas
+    [SerializeField][Range(1, 1000)] private int numeroHorda;
+    private Coroutine hordaCoroutine;
+
+
+    ////////////////////////// Enemigos //////////////////////////
+    [SerializeField] private GameObject esqueletoPrefab; //enemigo principiante (unico por ahora)
+
 
     private void Awake() {
         if (instancia == null) {
@@ -29,26 +39,44 @@ public class GameManager : MonoBehaviour
         InstanciarEnemigo(new Vector3(10, 1, 0));
         InstanciarEnemigo(new Vector3(11, 2, 0));
         InstanciarEnemigo(new Vector3(12, 3, 0));
-        Debug.Log("Horda: " + juegoData.NumeroHorda);
+        Debug.Log("Horda: " + numeroHorda);
         GetNumEnemigos();
 
     }
     /////////// Sistema de Progresion ///////////////
 
-    private void NuevaHorda()
-    {
+    private void NuevaHorda() {
+        
+        if (hordaCoroutine == null)
+            hordaCoroutine = StartCoroutine(ControlarHorda());
+    }
 
-        juegoData.NumeroHorda++;
+    private IEnumerator ControlarHorda() {
+
+        numeroHorda++;
         Victoria();
-        Debug.Log("Horda: " + juegoData.NumeroHorda + ". Más monstruos están por llegar...");
+        Debug.Log("Horda: " + numeroHorda + ". Más monstruos están por llegar...");
 
-        cantidad = Random.Range(juegoData.NumeroHorda, juegoData.NumeroHorda + juegoData.NumeroHorda + 1);
+        // Calcular cantidad aleatoria de enemigos
+        cantidad = Random.Range(numeroHorda, numeroHorda + numeroHorda + 1);
+
+        // Esperar 10 segundos antes de spawnear
+        yield return new WaitForSeconds(10f);
+
+        // Spawnear enemigos
         for (int i = 0; i < cantidad; i++) {
-            Invoke("PrepararEnemigo", 10f);
+            PrepararEnemigo();
+            yield return null; // Pausa por frame
         }
 
         GetNumEnemigos();
 
+        // Esperar hasta que no queden enemigos
+        yield return new WaitUntil(() => enemigosVivos.Count == 0);
+
+        // Reiniciar corrutina
+        hordaCoroutine = null;
+        NuevaHorda();
     }
 
     public void AgregarEnemigo(UnidadEnemiga enemigo) {
@@ -67,8 +95,7 @@ public class GameManager : MonoBehaviour
 
     //////// Metodos para Enemigos ////////
     
-    private void PrepararEnemigo()
-    {
+    private void PrepararEnemigo() {
 
         posX = Random.Range(0f, 5f);
         posY = Random.Range(0f, 5f);

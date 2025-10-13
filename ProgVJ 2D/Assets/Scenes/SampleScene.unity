@@ -1544,6 +1544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   juegoData: {fileID: 11400000, guid: a977c8b248500b64496982cda8c4e414, type: 2}
+  numeroHorda: 1
   esqueletoPrefab: {fileID: 8717663361120014766, guid: 1de0566ee39e41049a9d32559349e5c5, type: 3}
 --- !u!4 &1432436127
 Transform:

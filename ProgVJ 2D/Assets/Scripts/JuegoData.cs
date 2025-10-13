@@ -3,8 +3,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "JuegoData", menuName = "Scriptable Objects/JuegoData")]
 public class JuegoData : ScriptableObject {
 
-    [SerializeField] [Range(1, 1000)] private int numeroHorda;
-    public int NumeroHorda { get => numeroHorda; set => numeroHorda = value; }
+    //[SerializeField] [Range(1, 1000)] private int numeroHorda;
+    //public int NumeroHorda { get => numeroHorda; set => numeroHorda = value; }
 
     ///////Usados en ArmeriaManager
     [SerializeField][Range(10, 2000)] private int costoOre;
