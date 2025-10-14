@@ -5,9 +5,6 @@ public class Esqueleto : UnidadEnemiga
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
-        //vida = 75;
-        //ataque = 25;
-        //velocidadAtaque = 1.75f;
     }
 
     // Update is called once per frame
@@ -52,4 +49,6 @@ public class Esqueleto : UnidadEnemiga
         }
 
     }
+
+
 }

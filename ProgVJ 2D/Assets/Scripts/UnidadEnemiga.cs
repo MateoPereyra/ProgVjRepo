@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class UnidadEnemiga : MonoBehaviour
 {
-    [SerializeField] protected int vida;
+    [SerializeField] protected int vidaMax;
+    protected int vida;
     [SerializeField] protected int ataque;
     [SerializeField] protected float velocidadAtaque;
 
@@ -10,6 +11,11 @@ public class UnidadEnemiga : MonoBehaviour
     public bool conVida => vida > 0;
     protected UnidadAliada enemigoEnRango;
     protected ArmeriaManager armeriaEnRango;
+
+    private void OnEnable() {
+        // Cada vez que el enemigo se activa restablece su vida
+        vida = vidaMax;
+    }
 
     public virtual void RecibirDanio(int danio) {
         vida -= danio;
@@ -21,7 +27,6 @@ public class UnidadEnemiga : MonoBehaviour
 
     protected virtual void Morir() {
         GameManager.instancia.EliminarEnemigo(this);
-        Destroy(gameObject);
     }
 
     protected void Atacar(UnidadAliada objetivo) {
@@ -39,5 +44,11 @@ public class UnidadEnemiga : MonoBehaviour
             armeriaEnRango.RecibirDanio(ataque);
             tiempoUltimoAtaque = Time.time;
         }
+    }
+
+    protected virtual void SetVida() {
+
+        vida = vidaMax;    
+    
     }
 }

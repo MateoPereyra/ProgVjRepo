@@ -12,14 +12,14 @@ public class EnemigoController : MonoBehaviour
     private bool enPelea;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
-        armeriamanager = FindFirstObjectByType<ArmeriaManager>();
-        destino = GameObject.Find("Armeria").transform;
-        puntoDestino = (destino.position - transform.position).normalized;
+    //void Start() {
+    //    armeriamanager = FindFirstObjectByType<ArmeriaManager>();
+    //    destino = GameObject.Find("Armeria").transform;
+    //    puntoDestino = (destino.position - transform.position).normalized;
 
-        enAldea = false;
-        enPelea = false;
-    }
+    //    enAldea = false;
+    //    enPelea = false;
+    //}
 
     // Update is called once per frame
     void Update() {
@@ -61,4 +61,12 @@ public class EnemigoController : MonoBehaviour
         }
     }
 
+    private void OnEnable() {
+        armeriamanager = FindFirstObjectByType<ArmeriaManager>();
+        destino = GameObject.Find("Armeria").transform;
+        puntoDestino = (destino.position - transform.position).normalized;
+
+        enAldea = false;
+        enPelea = false;
+    }
 }

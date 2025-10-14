@@ -7558,7 +7558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaec1286aa0f3bb4c857350103cebcbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vida: 75
+  vidaMax: 75
   ataque: 10
   velocidadAtaque: 2
 --- !u!1 &8827643254797090275

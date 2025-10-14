@@ -11,12 +11,15 @@ public class GameManager : MonoBehaviour
     public JuegoData JuegoData {  get => juegoData; }
 
     //Manejo de enemigos
-    private List<UnidadEnemiga> enemigosVivos = new List<UnidadEnemiga>(); //Para el sistema de progresion en hordas
+    private List<UnidadEnemiga> enemigosVivos; //Para el sistema de progresion en hordas///
     private float posX, posY; //Posiciones aleatorias para spawnear enemigos
+
+    [SerializeField] private int poolSize = 50; //tamaño del pool de enemigos///
     private int cantidad; //Cantidad aleatoria de enemigos a generar en cada horda
 
     //Manejo de hordas
     [SerializeField][Range(1, 1000)] private int numeroHorda;
+    [SerializeField][Range(1, 1000)] private int cdHordas;
     private Coroutine hordaCoroutine;
 
 
@@ -36,13 +39,17 @@ public class GameManager : MonoBehaviour
 
     private void Start() {
 
-        InstanciarEnemigo(new Vector3(10, 1, 0));
-        InstanciarEnemigo(new Vector3(11, 2, 0));
-        InstanciarEnemigo(new Vector3(12, 3, 0));
+        enemigosVivos = new List<UnidadEnemiga>();
+        for (int i = 0; i < poolSize; i++) {
+            InstanciarEnemigo();
+        }
+        NuevaHorda();///
         Debug.Log("Horda: " + numeroHorda);
         GetNumEnemigos();
 
     }
+
+
     /////////// Sistema de Progresion ///////////////
 
     private void NuevaHorda() {
@@ -60,8 +67,8 @@ public class GameManager : MonoBehaviour
         // Calcular cantidad aleatoria de enemigos
         cantidad = Random.Range(numeroHorda, numeroHorda + numeroHorda + 1);
 
-        // Esperar 10 segundos antes de spawnear
-        yield return new WaitForSeconds(10f);
+        // Esperar X segundos antes de spawnear
+        yield return new WaitForSeconds(cdHordas);
 
         // Spawnear enemigos
         for (int i = 0; i < cantidad; i++) {
@@ -72,51 +79,78 @@ public class GameManager : MonoBehaviour
         GetNumEnemigos();
 
         // Esperar hasta que no queden enemigos
-        yield return new WaitUntil(() => enemigosVivos.Count == 0);
+        yield return new WaitUntil(() => TodosLosEnemigosInactivos());///
 
         // Reiniciar corrutina
         hordaCoroutine = null;
         NuevaHorda();
     }
 
-    public void AgregarEnemigo(UnidadEnemiga enemigo) {
-        enemigosVivos.Add(enemigo);
-    }
-
-    public void EliminarEnemigo(UnidadEnemiga enemigo) {
-        enemigosVivos.Remove(enemigo);
-        GetNumEnemigos();
-
-        if (enemigosVivos.Count == 0) {
-            NuevaHorda();
+    private void PrepararEnemigo() {
+        UnidadEnemiga pooledEnemy = GetPooledEnemy();
+        if (pooledEnemy != null) {
+            posX = Random.Range(0f, 5f);
+            posY = Random.Range(0f, 5f);
+            pooledEnemy.transform.position = new Vector3(posX, posY, 0);
+            pooledEnemy.transform.rotation = Quaternion.identity;
+            pooledEnemy.gameObject.SetActive(true);
         }
 
     }
 
-    //////// Metodos para Enemigos ////////
-    
-    private void PrepararEnemigo() {
-
-        posX = Random.Range(0f, 5f);
-        posY = Random.Range(0f, 5f);
-        InstanciarEnemigo(new Vector3(posX, posY, 0));
-
-    }
-
-    private void InstanciarEnemigo(Vector3 posicion)
+    private void InstanciarEnemigo()
     {
 
-        GameObject clon = Instantiate(esqueletoPrefab, posicion, Quaternion.identity);
+        GameObject clon = Instantiate(esqueletoPrefab);
         UnidadEnemiga enemigo = clon.GetComponent<UnidadEnemiga>();
+        enemigo.gameObject.SetActive(false);
         AgregarEnemigo(enemigo);
 
     }
 
-    private void GetNumEnemigos() {
+
+    public void AgregarEnemigo(UnidadEnemiga enemigo)
+    {
+        enemigosVivos.Add(enemigo);
+    }
+
+    public void EliminarEnemigo(UnidadEnemiga enemigo) {
+        enemigo.gameObject.SetActive(false);
+        GetNumEnemigos();
+
+        if (TodosLosEnemigosInactivos())
+        {
+            NuevaHorda();
+        }
+    }
+
+
+    private UnidadEnemiga GetPooledEnemy()
+    {
+        foreach (UnidadEnemiga enemigo in enemigosVivos)
+        {
+            if (!enemigo.gameObject.activeInHierarchy)
+            {
+                return enemigo;
+            }
+        }
+
+        return null;
+    }
+
+    private bool TodosLosEnemigosInactivos() {
+    foreach (UnidadEnemiga enemigo in enemigosVivos)
+        if (enemigo.gameObject.activeInHierarchy)
+            return false;
+    return true;
+}
+
+
+    private void GetNumEnemigos()
+    {
         Debug.Log("Enemigos restantes: " + enemigosVivos.Count);
     }
 
-    
     ////////// Victoria/Derrota ////////////
     public void GameOver() {
         Debug.Log("Los monstruos destruyeron la armeria... ¡Game Over!");
