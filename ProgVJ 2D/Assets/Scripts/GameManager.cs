@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     private int cantidad; //Cantidad aleatoria de enemigos a generar en cada horda
 
     //Manejo de hordas
-    [SerializeField][Range(1, 1000)] private int numeroHorda;
+    [SerializeField][Range(0, 1000)] private int numeroHorda;
     [SerializeField][Range(1, 1000)] private int cdHordas;
     private Coroutine hordaCoroutine;
 
@@ -43,9 +43,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < poolSize; i++) {
             InstanciarEnemigo();
         }
-        NuevaHorda();///
-        Debug.Log("Horda: " + numeroHorda);
-        GetNumEnemigos();
+        NuevaHorda();
 
     }
 
@@ -62,7 +60,6 @@ public class GameManager : MonoBehaviour
 
         numeroHorda++;
         Victoria();
-        Debug.Log("Horda: " + numeroHorda + ". Más monstruos están por llegar...");
 
         // Calcular cantidad aleatoria de enemigos
         cantidad = Random.Range(numeroHorda, numeroHorda + numeroHorda + 1);
@@ -76,7 +73,7 @@ public class GameManager : MonoBehaviour
             yield return null; // Pausa por frame
         }
 
-        GetNumEnemigos();
+
 
         // Esperar hasta que no queden enemigos
         yield return new WaitUntil(() => TodosLosEnemigosInactivos());///
@@ -116,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     public void EliminarEnemigo(UnidadEnemiga enemigo) {
         enemigo.gameObject.SetActive(false);
-        GetNumEnemigos();
+        
 
         if (TodosLosEnemigosInactivos())
         {
@@ -145,11 +142,6 @@ public class GameManager : MonoBehaviour
     return true;
 }
 
-
-    private void GetNumEnemigos()
-    {
-        Debug.Log("Enemigos restantes: " + enemigosVivos.Count);
-    }
 
     ////////// Victoria/Derrota ////////////
     public void GameOver() {
