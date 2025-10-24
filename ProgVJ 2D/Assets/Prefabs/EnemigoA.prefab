@@ -7561,6 +7561,8 @@ MonoBehaviour:
   vidaMax: 75
   ataque: 10
   velocidadAtaque: 2
+  spum: {fileID: 1922567579027789212}
+  _currentState: 0
 --- !u!1 &8827643254797090275
 GameObject:
   m_ObjectHideFlags: 0

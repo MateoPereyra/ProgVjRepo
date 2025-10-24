@@ -3,21 +3,21 @@ using UnityEngine;
 public class Esqueleto : UnidadEnemiga
 {
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start() {
-    }
-
     // Update is called once per frame
     void Update() {
 
-        if (enemigoEnRango != null && enemigoEnRango.conVida) {
-            Atacar(enemigoEnRango); //ataca hasta que el enemigo ya no se encuentre en rango
-        }
-
-        if (armeriaEnRango != null) {
+        if (enemigoEnRango != null && enemigoEnRango.conVida)
+            Atacar(enemigoEnRango);
+        else if (armeriaEnRango != null)
             AtacarArmeria();
-        }
+        else
+            _currentState = PlayerState.MOVE; // si no hay objetivo, volver a moverse
 
+        // Solo reproduce la animación si cambió el estado
+        if (_currentState != _ultimoEstado) {
+            PlayStateAnimation(_currentState);
+            _ultimoEstado = _currentState;
+        }
     }
 
     //Usado para pelear

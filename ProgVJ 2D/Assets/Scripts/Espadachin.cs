@@ -4,17 +4,10 @@ public class Espadachin : UnidadAliada
 {
 
     void Start() {
-        //vida = 150;
-        //ataque = 35;
-        //velocidadAtaque = 1.75f;
-        //velocidadMovimiento = 2;
     }
 
     void Update() {
 
-        //if (enemigoEnRango != null && enemigoEnRango.conVida) {
-        //    Atacar(enemigoEnRango); //ataca hasta que el enemigo ya no se encuentre en rango
-        //}
 
         // Si hay enemigos en la aldea, buscar al más cercano
         UnidadEnemiga objetivo = ZonaAldea.instancia.GetEnemigoCercano(transform.position);

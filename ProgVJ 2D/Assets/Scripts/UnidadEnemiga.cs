@@ -1,4 +1,7 @@
 using UnityEngine;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class UnidadEnemiga : MonoBehaviour
 {
@@ -12,23 +15,45 @@ public class UnidadEnemiga : MonoBehaviour
     protected UnidadAliada enemigoEnRango;
     protected ArmeriaManager armeriaEnRango;
 
-    private SPUM_Prefabs spum;
+    protected SPUM_Prefabs spum;
+    protected PlayerState _currentState;
+    protected PlayerState _ultimoEstado;
+    protected Dictionary<PlayerState, int> IndexPair = new ();
 
     private void Awake()
     {
-        spum = GetComponent<SPUM_Prefabs>();
-        //spum.OverrideControllerInit(); //para usar las animaciones de defecto del prefab
+
+        if (spum == null)
+        {
+            spum = GetComponentInChildren<SPUM_Prefabs>();
+        }
+
+        if (!spum.allListsHaveItemsExist()) {
+              spum.PopulateAnimationLists();
+          }
+
+        spum.OverrideControllerInit();
+        foreach (PlayerState state in Enum.GetValues(typeof(PlayerState))) {
+            IndexPair[state] = 0;
+        }
+
+
     }
 
     private void OnEnable() {
         // Cada vez que el enemigo se activa restablece su vida
         vida = vidaMax;
+
+        _currentState = PlayerState.MOVE;
+        PlayStateAnimation(_currentState);
     }
 
     public virtual void RecibirDanio(int danio) {
         vida -= danio;
         if (vida <= 0) {
-            Morir();
+            _currentState = PlayerState.DEATH;
+            PlayStateAnimation(_currentState);
+            Invoke(nameof(Morir), 1f);
         }
 
     }
@@ -43,16 +68,11 @@ public class UnidadEnemiga : MonoBehaviour
         if (Time.time - tiempoUltimoAtaque >= velocidadAtaque) {
             objetivo.RecibirDanio(ataque);
             tiempoUltimoAtaque = Time.time;
+
+            _currentState = PlayerState.ATTACK;
+            PlayStateAnimation(_currentState);
         }
 
-        if (spum._anim != null) {
-            // Esto dispara la animación de ataque original
-            spum._anim.SetTrigger("2_Attack");
-            Debug.Log("Disparando animación de ataque original");
-        }
-        else {
-            Debug.LogWarning("Animator no asignado en SPUM_Prefabs");
-        }
     }
     
 
@@ -61,14 +81,20 @@ public class UnidadEnemiga : MonoBehaviour
         if (Time.time - tiempoUltimoAtaque >= velocidadAtaque) {
             armeriaEnRango.RecibirDanio(ataque);
             tiempoUltimoAtaque = Time.time;
+
+            _currentState = PlayerState.ATTACK;
+            PlayStateAnimation(_currentState);
         }
 
-        spum._anim.SetTrigger("0_Attack_Normal");
     }
 
     protected virtual void SetVida() {
 
         vida = vidaMax;    
     
+    }
+
+    protected virtual void PlayStateAnimation(PlayerState state) { 
+        spum.PlayAnimation(state, IndexPair[state]);
     }
 }
