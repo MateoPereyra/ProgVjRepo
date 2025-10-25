@@ -21,6 +21,10 @@ public class UnidadAliada : MonoBehaviour
     protected PlayerState _ultimoEstado;
     protected Dictionary<PlayerState, int> IndexPair = new();
 
+    [SerializeField] private AudioClip muerte;
+    [SerializeField] private AudioClip sonidoAtaque;
+    private AudioSource audioSource;
+
     private void Awake()
     {
         //spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -48,6 +52,8 @@ public class UnidadAliada : MonoBehaviour
 
         _currentState = PlayerState.IDLE;
         PlayStateAnimation(_currentState);
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     public virtual void RecibirDanio(int danio) {
@@ -55,6 +61,8 @@ public class UnidadAliada : MonoBehaviour
         if (vida <= 0) {
             _currentState = PlayerState.DEATH;
             PlayStateAnimation(_currentState);
+            audioSource.PlayOneShot(muerte);
+
             Invoke(nameof(Morir), 1f);
         }
            
@@ -73,6 +81,7 @@ public class UnidadAliada : MonoBehaviour
 
             _currentState = PlayerState.ATTACK;
             PlayStateAnimation(_currentState);
+            audioSource.PlayOneShot(sonidoAtaque);
         }
     }
 

@@ -12,6 +12,8 @@ public class ArmeriaManager : MonoBehaviour
 
     [SerializeField] private GameObject panelArmeria;
     [SerializeField] private GameObject reclutaPrefab;
+    [SerializeField] private GameObject particulasGolpe;
+    [SerializeField] private GameObject particulasSpawn;
 
     [SerializeField][Range(10, 2000)] private int monedas;
     [SerializeField] private int resistencia;
@@ -97,20 +99,27 @@ public class ArmeriaManager : MonoBehaviour
 
             cantidadRecluta++;
             GameObject recluta = Instantiate(reclutaPrefab);
-            //recluta.transform.position += Vector3.right * cantidadRecluta;
+            GameObject partSpawn = Instantiate(particulasSpawn);
+
             int columnasPorFila = 2; // cada fila tiene 2 reclutas
-            int columna = (cantidadRecluta % columnasPorFila) + 1; // +1 para empezar en X=1
-            int fila = (cantidadRecluta / columnasPorFila) + 1;     // +1 para empezar en Y=1
+            int columna = (cantidadRecluta % columnasPorFila) + 1;
+            int fila = (cantidadRecluta / columnasPorFila) + 1;     
 
             float distanciaX = 1f; // separación horizontal entre reclutas
             float distanciaY = 1f; // separación vertical entre filas
-            float offsetX = -20f; // desplazamiento inicial en X
+            float offsetX = -22f; // desplazamiento inicial en X
 
             recluta.transform.position = new Vector3(
                 offsetX + (columna * distanciaX),
                 fila * distanciaY,
                 0f
             );
+            particulasSpawn.transform.position = new Vector3(
+                offsetX + (columna * distanciaX),
+                fila * distanciaY,
+                0f
+            );
+            Destroy(partSpawn, 1f);
             actTexReclutas(); 
         }
     }
@@ -140,6 +149,10 @@ public class ArmeriaManager : MonoBehaviour
     public void RecibirDanio(int danio) {
         resistencia -= danio;
             if (resistencia > 0) {
+
+            GameObject partHit = Instantiate(particulasGolpe, transform.position, Quaternion.identity);
+            Destroy(partHit, 1f);
+
             Debug.Log("Armería: " + resistencia + " HP restantes");
         } else {
             Derrota();
@@ -150,4 +163,22 @@ public class ArmeriaManager : MonoBehaviour
         GameManager.instancia.GameOver();
         Destroy(gameObject);
     }
+
+    //Para las recompensas desde GameManager
+    public void Recompensas(int valorRecompensa) {
+        monedas += valorRecompensa;
+        actTexMonedas();
+    
+    }
+
+    //private void DestruirParticulaSpawn() {
+
+    //    Destroy(gameObject.particulasSpawn);
+
+    //}
+    //private void DestruirParticulaHit() {
+
+    //    Destroy(gameObject.particulasGolpe);
+
+    //}
 }

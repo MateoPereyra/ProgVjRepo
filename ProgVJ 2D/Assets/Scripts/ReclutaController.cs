@@ -5,10 +5,14 @@ public class ReclutaController : UnidadAliada
 
     [SerializeField] private ArmeriaManager armeriamanager;
     [SerializeField] private Transform destino;
+
     [SerializeField] private GameObject espadachinPrefab;
+    [SerializeField] private GameObject particulasSpawn;
+
 
     private Vector3 puntoDestino;
     private Vector3 puntoOrigen;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start() {
@@ -18,10 +22,6 @@ public class ReclutaController : UnidadAliada
         puntoDestino = (destino.position - transform.position).normalized;
         puntoOrigen = (transform.position - destino.position).normalized; //por ahora, no se usa
 
-        //vida = 100;
-        //ataque = 15;
-        //velocidadAtaque = 2.0f;
-        //velocidadMovimiento = 1;
     }
 
     // Update is called once per frame
@@ -29,9 +29,17 @@ public class ReclutaController : UnidadAliada
         
         if (armeriamanager.getArmas()) {
             transform.Translate(puntoDestino * Time.deltaTime);
+
+            _currentState = PlayerState.MOVE;
+            PlayStateAnimation(_currentState);
+
+        } else {
+            _currentState = PlayerState.IDLE;
+            PlayStateAnimation(_currentState);
         }
 
-        if (enemigoEnRango != null && enemigoEnRango.conVida) {
+        if (enemigoEnRango != null && enemigoEnRango.conVida)
+        {
             Atacar(enemigoEnRango); //ataca hasta que el enemigo ya no se encuentre en rango
         }
 
@@ -66,6 +74,8 @@ public class ReclutaController : UnidadAliada
         Destroy(gameObject); // destruye al recluta para convertirlo en otra unidad (Espadachin)
         GameObject Espadachin = Instantiate(espadachinPrefab);
         espadachinPrefab.transform.position = pos;
+        GameObject partSpawn = Instantiate(particulasSpawn, pos, Quaternion.identity);
+        Destroy(partSpawn, 1f);
 
     }
 }

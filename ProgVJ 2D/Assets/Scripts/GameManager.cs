@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private JuegoData juegoData;
     public JuegoData JuegoData {  get => juegoData; }
 
+    [SerializeField] private ArmeriaManager armeriamanager;
+    int recompensas;
+
     //Manejo de enemigos
     private List<UnidadEnemiga> enemigosVivos; //Para el sistema de progresion en hordas///
     private float posX, posY; //Posiciones aleatorias para spawnear enemigos
@@ -117,6 +120,8 @@ public class GameManager : MonoBehaviour
 
         if (TodosLosEnemigosInactivos())
         {
+            recompensas = CalcularRecompensa();
+            armeriamanager.Recompensas(recompensas);
             NuevaHorda();
         }
     }
@@ -157,5 +162,9 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Acabaste con todos los monstruos. ¡Has ganado!... por ahora");
     
+    }
+
+    private int CalcularRecompensa() {
+        return 100 + (numeroHorda * 25);
     }
 }

@@ -20,6 +20,10 @@ public class UnidadEnemiga : MonoBehaviour
     protected PlayerState _ultimoEstado;
     protected Dictionary<PlayerState, int> IndexPair = new ();
 
+    [SerializeField] private AudioClip muerte;
+    [SerializeField] private AudioClip sonidoAtaque;
+    private AudioSource audioSource;
+
     private void Awake()
     {
 
@@ -44,6 +48,8 @@ public class UnidadEnemiga : MonoBehaviour
         // Cada vez que el enemigo se activa restablece su vida
         vida = vidaMax;
 
+        audioSource = GetComponent<AudioSource>();
+
         _currentState = PlayerState.MOVE;
         PlayStateAnimation(_currentState);
     }
@@ -53,6 +59,8 @@ public class UnidadEnemiga : MonoBehaviour
         if (vida <= 0) {
             _currentState = PlayerState.DEATH;
             PlayStateAnimation(_currentState);
+            audioSource.PlayOneShot(muerte);
+
             Invoke(nameof(Morir), 1f);
         }
 
@@ -71,6 +79,7 @@ public class UnidadEnemiga : MonoBehaviour
 
             _currentState = PlayerState.ATTACK;
             PlayStateAnimation(_currentState);
+            audioSource.PlayOneShot(sonidoAtaque);
         }
 
     }
@@ -84,6 +93,7 @@ public class UnidadEnemiga : MonoBehaviour
 
             _currentState = PlayerState.ATTACK;
             PlayStateAnimation(_currentState);
+            audioSource.PlayOneShot(sonidoAtaque);
         }
 
     }
